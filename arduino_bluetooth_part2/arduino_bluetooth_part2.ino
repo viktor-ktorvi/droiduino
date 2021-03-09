@@ -27,12 +27,16 @@ void loop() {
   // Control LED in Arduino board
   if (msg == "<turn on>"){
     digitalWrite(ledPin, HIGH); // Turn on LED
-    Serial.println("LED is turned on\n"); // Then send status message to Android
+
+    // Then send status message to Android
+    Serial.println("LED is turned on\n"); //  Must have \n at the end.
     msg = ""; // reset command
   } else {
     if (msg == "<turn off>"){
       digitalWrite(ledPin, LOW); // Turn off LED
-      Serial.println("LED is turned off\n"); // Then send status message to Android
+
+      // Then send status message to Android
+      Serial.println("LED is turned off\n");  //  Must have \n at the end.
       msg = ""; // reset command
     }
   }
