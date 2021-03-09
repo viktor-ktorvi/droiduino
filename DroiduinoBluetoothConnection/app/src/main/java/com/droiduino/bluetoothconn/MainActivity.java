@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         buttonToggle.setEnabled(false);
         final ImageView imageView = findViewById(R.id.imageView);
         imageView.setBackgroundColor(getResources().getColor(R.color.colorOff));
+        buttonToggle.setBackgroundColor(getResources().getColor(R.color.colorOff));
+
 
         // If a bluetooth device has been selected from SelectDeviceActivity
         deviceName = getIntent().getStringExtra("deviceName");

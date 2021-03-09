@@ -4,5 +4,11 @@
     <color name="colorPrimaryDark">#0288D1</color>
     <color name="colorAccent">#E040FB</color>
     <color name="colorOff">#000000</color>
-    <color name="colorOn">#CEFFFF</color>
+    <color name="colorOn">#FF0000</color>
+
+<!--    <color name="colorPrimary">#58D68D</color>-->
+<!--    <color name="colorPrimaryDark">#239B56</color>-->
+<!--    <color name="colorAccent">#C0392B</color>-->
+<!--    <color name="colorOff">#C0392B</color>-->
+<!--    <color name="colorOn">#ABEBC6</color>-->
 </resources>
