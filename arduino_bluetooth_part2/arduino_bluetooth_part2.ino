@@ -10,8 +10,9 @@ String msg,cmd;
 void setup() {
   // Initialization
   pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, LOW);
+  digitalWrite(ledPin, LOW); 
   Serial.begin(9600); // Communication rate of the Bluetooth Module
+  Serial.setTimeout(10); // ms delay after Serial.readString(), default is 1000!
   msg = "";
 }
 
