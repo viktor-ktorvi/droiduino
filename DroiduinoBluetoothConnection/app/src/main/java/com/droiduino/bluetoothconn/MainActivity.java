@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
                                 buttonToggle.setEnabled(true);
                                 break;
                             case -1:
+                                // TODO Issue: If already connected and you click on connect it
+                                //  goes here and screws everything up
                                 toolbar.setSubtitle("Device fails to connect");
                                 progressBar.setVisibility(View.GONE);
                                 buttonConnect.setEnabled(true);
