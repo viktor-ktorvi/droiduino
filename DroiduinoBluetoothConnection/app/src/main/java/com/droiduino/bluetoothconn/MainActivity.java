@@ -106,10 +106,12 @@ public class MainActivity extends AppCompatActivity {
                         switch (arduinoMsg.toLowerCase()){
                             case "led is turned on":
                                 imageView.setBackgroundColor(getResources().getColor(R.color.colorOn));
+                                buttonToggle.setBackgroundColor(getResources().getColor(R.color.colorOn));
                                 textViewInfo.setText("Arduino Message : " + arduinoMsg);
                                 break;
                             case "led is turned off":
                                 imageView.setBackgroundColor(getResources().getColor(R.color.colorOff));
+                                buttonToggle.setBackgroundColor(getResources().getColor(R.color.colorOff));
                                 textViewInfo.setText("Arduino Message : " + arduinoMsg);
                                 break;
                         }
