@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         final ProgressBar progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
         final TextView textViewInfo = findViewById(R.id.textViewInfo);
+        final TextView textViewMeasured = findViewById(R.id.measured_val);
         final Button buttonToggle = findViewById(R.id.buttonToggle);
         buttonToggle.setEnabled(false);
         final ImageView imageView = findViewById(R.id.imageView);
@@ -105,17 +106,22 @@ public class MainActivity extends AppCompatActivity {
 
                     case MESSAGE_READ:
                         String arduinoMsg = msg.obj.toString(); // Read message from Arduino
-                        switch (arduinoMsg.toLowerCase()){
-                            case "led is turned on":
-                                imageView.setBackgroundColor(getResources().getColor(R.color.colorOn));
-                                buttonToggle.setBackgroundColor(getResources().getColor(R.color.colorOn));
-                                textViewInfo.setText("Arduino Message : " + arduinoMsg);
-                                break;
-                            case "led is turned off":
-                                imageView.setBackgroundColor(getResources().getColor(R.color.colorOff));
-                                buttonToggle.setBackgroundColor(getResources().getColor(R.color.colorOff));
-                                textViewInfo.setText("Arduino Message : " + arduinoMsg);
-                                break;
+                        if (Utils.isNumber(arduinoMsg)){
+                            textViewMeasured.setText("Measured value = " + arduinoMsg);
+                        }
+                        else {
+                            switch (arduinoMsg.toLowerCase()) {
+                                case "led is turned on":
+                                    imageView.setBackgroundColor(getResources().getColor(R.color.colorOn));
+                                    buttonToggle.setBackgroundColor(getResources().getColor(R.color.colorOn));
+                                    textViewInfo.setText("Arduino Message : " + arduinoMsg);
+                                    break;
+                                case "led is turned off":
+                                    imageView.setBackgroundColor(getResources().getColor(R.color.colorOff));
+                                    buttonToggle.setBackgroundColor(getResources().getColor(R.color.colorOff));
+                                    textViewInfo.setText("Arduino Message : " + arduinoMsg);
+                                    break;
+                            }
                         }
                         break;
                 }
@@ -255,12 +261,8 @@ public class MainActivity extends AppCompatActivity {
                      */
                     buffer[bytes] = (byte) mmInStream.read();
                     String readMessage;
-                    if (buffer[bytes] == '\n'){
+                    if (buffer[bytes] == '\n' || buffer[bytes] == '\r'){
                         readMessage = new String(buffer,0,bytes);
-                        // if its not a number display it
-
-//                        if (Utils.isNumber(readMessage))
-                        Log.d("isNum", "nope");
                         Log.d("ard_msg", readMessage);
                         Log.e("Arduino Message", readMessage);
                         handler.obtainMessage(MESSAGE_READ, readMessage).sendToTarget();

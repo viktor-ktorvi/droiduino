@@ -5,7 +5,7 @@
  */
 
 const int ledPin = 13; // Built in LED in Arduino board
-String msg,cmd;
+String msg, cmd;
 
 void setup() {
   // Initialization
@@ -29,14 +29,15 @@ void loop() {
     digitalWrite(ledPin, HIGH); // Turn on LED
 
     // Then send status message to Android
-    Serial.println("LED is turned on\n"); //  Must have \n at the end.
+    Serial.println("LED is turned on"); 
     msg = ""; // reset command
   } else {
     if (msg == "<turn off>"){
       digitalWrite(ledPin, LOW); // Turn off LED
 
       // Then send status message to Android
-      Serial.println("LED is turned off\n");  //  Must have \n at the end.
+      Serial.println("LED is turned off");  
+      Serial.println(String(65.007, 3));
       msg = ""; // reset command
     }
   }
