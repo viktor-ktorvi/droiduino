@@ -9,6 +9,7 @@ double measurement = 0.0;
 const int ledPin = 13; // Built in LED in Arduino board
 String msg, cmd;
 
+
 void setup() {
   // Initialization
   pinMode(ledPin, OUTPUT);
@@ -19,13 +20,11 @@ void setup() {
 }
 
 void loop() {
-  
   // To read message received from other Bluetooth Device
   if (Serial.available() > 0){ // Check if there is data coming
     msg = Serial.readString(); // Read the message as String
     Serial.println("Android Command: " + msg);
   }
-
   // Control LED in Arduino board
   if (msg == "<turn on>"){
     digitalWrite(ledPin, HIGH); // Turn on LED
@@ -45,6 +44,4 @@ void loop() {
 
   measurement = analogRead(analog_pin);
   Serial.println(String(measurement, 3));
-
-
 }
