@@ -4,6 +4,8 @@
  * by Droiduino
  */
 
+int analog_pin = A0;
+double measurement = 0.0;
 const int ledPin = 13; // Built in LED in Arduino board
 String msg, cmd;
 
@@ -41,7 +43,8 @@ void loop() {
     }
   }
 
-  Serial.println(String(65.003, 3));
+  measurement = analogRead(analog_pin);
+  Serial.println(String(measurement, 3));
 
 
 }
