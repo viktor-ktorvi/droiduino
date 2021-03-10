@@ -257,8 +257,14 @@ public class MainActivity extends AppCompatActivity {
                     String readMessage;
                     if (buffer[bytes] == '\n'){
                         readMessage = new String(buffer,0,bytes);
-                        Log.e("Arduino Message",readMessage);
-                        handler.obtainMessage(MESSAGE_READ,readMessage).sendToTarget();
+                        // if its not a number display it
+
+//                        if (Utils.isNumber(readMessage))
+                        Log.d("isNum", "nope");
+                        Log.d("ard_msg", readMessage);
+                        Log.e("Arduino Message", readMessage);
+                        handler.obtainMessage(MESSAGE_READ, readMessage).sendToTarget();
+
                         bytes = 0;
                     } else {
                         bytes++;
