@@ -37,9 +37,11 @@ void loop() {
 
       // Then send status message to Android
       Serial.println("LED is turned off");  
-      Serial.println(String(65.007, 3));
       msg = ""; // reset command
     }
   }
+
+  Serial.println(String(65.003, 3));
+
 
 }

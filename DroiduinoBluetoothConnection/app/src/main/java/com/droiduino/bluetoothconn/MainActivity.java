@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case MESSAGE_READ:
+                        // TODO Make string placeholders.
                         String arduinoMsg = msg.obj.toString(); // Read message from Arduino
                         if (Utils.isNumber(arduinoMsg)){
                             textViewMeasured.setText("Measured value = " + arduinoMsg);
