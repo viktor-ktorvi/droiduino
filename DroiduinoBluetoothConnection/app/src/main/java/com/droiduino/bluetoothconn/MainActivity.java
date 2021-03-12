@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public static BluetoothSocket mmSocket;
     public static ConnectedThread connectedThread;
     public static CreateConnectThread createConnectThread;
+    public static boolean flag = false;
 
     private final static int CONNECTING_STATUS = 1; // used in bluetooth handler to identify message status
     private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
@@ -74,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
         Float[] x_vals = new Float[num];
         Float[] y_vals = new Float[num];
         for (int i = 0; i < num; i++) {
-            x_vals[i] = (float) i/num * 6.28f;
-            y_vals[i] = (float) Math.sin(x_vals[i]);
+            x_vals[i] = (float) i;
+            y_vals[i] = (float) Math.sin((float) i/num * 6.28f);
         }
 
         final MovingChart movingChart = new MovingChart(chart, x_vals, y_vals);
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     while(true) {
                         sleep(10);
-                        movingChart.shiftArray(-1);
+                        flag = true;
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -146,6 +147,11 @@ public class MainActivity extends AppCompatActivity {
                         String arduinoMsg = msg.obj.toString(); // Read message from Arduino
                         if (Utils.isNumber(arduinoMsg)){
                             textViewMeasured.setText("Measured value = " + arduinoMsg);
+                            if (flag) {
+                                float val = Float.parseFloat(arduinoMsg);
+                                movingChart.updateChart(val);
+                                flag = false;
+                            }
                         }
                         else {
                             switch (arduinoMsg.toLowerCase()) {

@@ -28,22 +28,23 @@ public class MovingChart {
         this.y_vals = y_vals;
 
         this.chart = chart;
-        updateData();
-    }
-
-    public void updateData(){
-        List<Entry> entries = new ArrayList<Entry>();
-        for (int i = 0; i < x_vals.length; i++)
-            entries.add(new Entry(x_vals[i], y_vals[i]));
 
         dataSet = new LineDataSet(entries, "Label");
         lineData = new LineData(dataSet);
-        chart.setData(lineData);
-        chart.invalidate(); // refresh
+        this.chart.setData(lineData);
+        this.chart.invalidate(); // refresh
     }
 
-    public void shiftArray(int shift) {
-        Collections.rotate(Arrays.asList(y_vals), shift);
-        updateData();
+
+    public void updateChart(float val) {
+
+        dataSet.removeFirst();
+        for (Entry entry : dataSet.getValues())
+            entry.setX(entry.getX() - 1);
+
+        dataSet.addEntry(new Entry(dataSet.getEntryCount(), val));
+        lineData.notifyDataChanged();
+        chart.notifyDataSetChanged();
+        chart.invalidate();
     }
 }
