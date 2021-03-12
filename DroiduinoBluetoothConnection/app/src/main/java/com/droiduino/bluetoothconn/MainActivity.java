@@ -21,9 +21,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 import static android.content.ContentValues.TAG;
@@ -58,6 +67,34 @@ public class MainActivity extends AppCompatActivity {
         imageView.setBackgroundColor(getResources().getColor(R.color.colorOff));
         buttonToggle.setBackgroundColor(getResources().getColor(R.color.colorOff));
 
+        LineChart chart = (LineChart) findViewById(R.id.chart);
+
+        int num = 200;
+        List<Entry> entries = new ArrayList<Entry>();
+        Float[] x_vals = new Float[num];
+        Float[] y_vals = new Float[num];
+        for (int i = 0; i < num; i++) {
+            x_vals[i] = (float) i/num * 6.28f;
+            y_vals[i] = (float) Math.sin(x_vals[i]);
+        }
+
+        final MovingChart movingChart = new MovingChart(chart, x_vals, y_vals);
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while(true) {
+                        sleep(10);
+                        movingChart.shiftArray(-1);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        thread.start();
 
         // If a bluetooth device has been selected from SelectDeviceActivity
         deviceName = getIntent().getStringExtra("deviceName");

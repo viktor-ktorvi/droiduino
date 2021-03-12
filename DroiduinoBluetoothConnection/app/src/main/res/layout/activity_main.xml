@@ -90,13 +90,13 @@
         android:id="@+id/measured_val"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/reportingChart"
+        app:layout_constraintBottom_toTopOf="@+id/chart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewInfo" />
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/reportingChart"
+        android:id="@+id/chart"
         android:layout_width="306dp"
         android:layout_height="177dp"
         android:layout_marginBottom="16dp"
