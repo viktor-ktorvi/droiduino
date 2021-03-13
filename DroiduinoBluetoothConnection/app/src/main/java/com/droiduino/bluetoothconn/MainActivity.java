@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         final RealTimeChart realTimeChart = new RealTimeChart(chart, x_vals, y_vals);
 
-        Thread thread = new Thread() {
+        Thread sampleThread = new Thread() {
             @Override
             public void run() {
                 try {
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        thread.start();
+        sampleThread.start();
 
         // If a bluetooth device has been selected from SelectDeviceActivity
         deviceName = getIntent().getStringExtra("deviceName");
