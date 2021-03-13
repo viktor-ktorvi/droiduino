@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         LineChart chart = (LineChart) findViewById(R.id.chart);
 
         int num = 200;
-        List<Entry> entries = new ArrayList<Entry>();
         Float[] x_vals = new Float[num];
         Float[] y_vals = new Float[num];
         for (int i = 0; i < num; i++) {
