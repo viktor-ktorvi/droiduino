@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public static BluetoothSocket mmSocket;
     public static ConnectedThread connectedThread;
     public static CreateConnectThread createConnectThread;
-    public static boolean flag = false;
+    public static boolean sampleFlag = false;
 
     private final static int CONNECTING_STATUS = 1; // used in bluetooth handler to identify message status
     private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     while(true) {
                         sleep(10);
-                        flag = true;
+                        sampleFlag = true;
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -137,10 +137,10 @@ public class MainActivity extends AppCompatActivity {
                         String arduinoMsg = msg.obj.toString(); // Read message from Arduino
                         if (Utils.isNumber(arduinoMsg)){
                             textViewMeasured.setText("Measured value = " + arduinoMsg);
-                            if (flag) {
+                            if (sampleFlag) {
                                 float val = Float.parseFloat(arduinoMsg);
                                 realTimeChart.updateChart(val);
-                                flag = false;
+                                sampleFlag = false;
                             }
                         }
                         else {
