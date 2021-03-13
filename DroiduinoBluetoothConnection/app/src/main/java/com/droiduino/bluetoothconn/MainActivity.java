@@ -30,8 +30,8 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String deviceName = null;
-    private String deviceAddress;
+    public String deviceName = null;
+    public String deviceAddress;
     public static Handler handler;
     public static BluetoothSocket mmSocket;
     public static ConnectedThread connectedThread;
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public static Button buttonToggle;
     public static ImageView imageView;
 
+    public static RealTimeChart realTimeChart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             y_vals[i] = (float) Math.sin((float) i/num * 6.28f);
         }
 
-        final RealTimeChart realTimeChart = new RealTimeChart(chart, x_vals, y_vals);
+        realTimeChart = new RealTimeChart(chart, x_vals, y_vals);
 
         Thread sampleThread = new Thread() {
             @Override
@@ -120,55 +121,11 @@ public class MainActivity extends AppCompatActivity {
         /*
         Second most important piece of Code. GUI Handler
          */
+        final MainActivity mainActivity = this;
         handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg){
-                switch (msg.what){
-                    case CONNECTING_STATUS:
-                        switch(msg.arg1){
-                            case 1:
-                                toolbar.setSubtitle("Connected to " + deviceName);
-                                progressBar.setVisibility(View.GONE);
-                                buttonConnect.setEnabled(true);
-                                buttonToggle.setEnabled(true);
-                                break;
-                            case -1:
-                                // TODO Issue: If already connected and you click on connect it
-                                //  goes here and screws everything up
-                                toolbar.setSubtitle("Device fails to connect");
-                                progressBar.setVisibility(View.GONE);
-                                buttonConnect.setEnabled(true);
-                                break;
-                        }
-                        break;
-
-                    case MESSAGE_READ:
-                        // TODO Make string placeholders.
-                        String arduinoMsg = msg.obj.toString(); // Read message from Arduino
-                        if (Utils.isNumber(arduinoMsg)){
-                            textViewMeasured.setText("Measured value = " + arduinoMsg);
-                            if (sampleFlag) {
-                                float val = Float.parseFloat(arduinoMsg);
-                                realTimeChart.updateChart(val);
-                                sampleFlag = false;
-                            }
-                        }
-                        else {
-                            switch (arduinoMsg.toLowerCase()) {
-                                case "led is turned on":
-                                    imageView.setBackgroundColor(getResources().getColor(R.color.colorOn));
-                                    buttonToggle.setBackgroundColor(getResources().getColor(R.color.colorOn));
-                                    textViewInfo.setText("Arduino Message : " + arduinoMsg);
-                                    break;
-                                case "led is turned off":
-                                    imageView.setBackgroundColor(getResources().getColor(R.color.colorOff));
-                                    buttonToggle.setBackgroundColor(getResources().getColor(R.color.colorOff));
-                                    textViewInfo.setText("Arduino Message : " + arduinoMsg);
-                                    break;
-                            }
-                        }
-                        break;
-                }
+                Utils.handleMessage(mainActivity, msg);
             }
         };
 
