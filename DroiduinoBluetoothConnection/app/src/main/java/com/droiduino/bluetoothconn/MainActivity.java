@@ -38,17 +38,17 @@ public class MainActivity extends AppCompatActivity {
     public static CreateConnectThread createConnectThread;
     public static boolean sampleFlag = false;
 
-    private final static int CONNECTING_STATUS = 1; // used in bluetooth handler to identify message status
-    private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
+    public final static int CONNECTING_STATUS = 1; // used in bluetooth handler to identify message status
+    public final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
 
-    public Button buttonConnect;
-    public Toolbar toolbar;
-    public ProgressBar progressBar;
+    public static Button buttonConnect;
+    public static Toolbar toolbar;
+    public static ProgressBar progressBar;
 
-    public TextView textViewInfo;
-    public TextView textViewMeasured;
-    public Button buttonToggle;
-    public ImageView imageView;
+    public static TextView textViewInfo;
+    public static TextView textViewMeasured;
+    public static Button buttonToggle;
+    public static ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

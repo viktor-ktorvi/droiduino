@@ -15,7 +15,7 @@ public class Utils {
         }
     }
 
-    public static void handleMessage(Message msg){
+    public static void handleMessage(MainActivity mainActivity, Message msg){
 
     }
 }
