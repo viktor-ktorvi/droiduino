@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class MovingChart {
+public class RealTimeChart {
 
     private LineChart chart;
     private LineDataSet dataSet;
@@ -18,7 +18,7 @@ public class MovingChart {
     private Float[] x_vals;
     private Float[] y_vals;
 
-    MovingChart(LineChart chart, Float[] x_vals, Float[] y_vals) {
+    RealTimeChart(LineChart chart, Float[] x_vals, Float[] y_vals) {
 
         List<Entry> entries = new ArrayList<Entry>();
         for (int i = 0; i < x_vals.length; i++)

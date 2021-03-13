@@ -1,13 +1,11 @@
 package com.droiduino.bluetoothconn;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,17 +20,10 @@ import android.widget.TextView;
 
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 import static android.content.ContentValues.TAG;
@@ -78,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             y_vals[i] = (float) Math.sin((float) i/num * 6.28f);
         }
 
-        final MovingChart movingChart = new MovingChart(chart, x_vals, y_vals);
+        final RealTimeChart realTimeChart = new RealTimeChart(chart, x_vals, y_vals);
 
         Thread thread = new Thread() {
             @Override
@@ -148,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                             textViewMeasured.setText("Measured value = " + arduinoMsg);
                             if (flag) {
                                 float val = Float.parseFloat(arduinoMsg);
-                                movingChart.updateChart(val);
+                                realTimeChart.updateChart(val);
                                 flag = false;
                             }
                         }
