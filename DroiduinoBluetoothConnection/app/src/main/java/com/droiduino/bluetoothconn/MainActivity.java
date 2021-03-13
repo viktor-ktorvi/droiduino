@@ -41,21 +41,31 @@ public class MainActivity extends AppCompatActivity {
     private final static int CONNECTING_STATUS = 1; // used in bluetooth handler to identify message status
     private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
 
+    public Button buttonConnect;
+    public Toolbar toolbar;
+    public ProgressBar progressBar;
+
+    public TextView textViewInfo;
+    public TextView textViewMeasured;
+    public Button buttonToggle;
+    public ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // UI Initialization
-        final Button buttonConnect = findViewById(R.id.buttonConnect);
-        final Toolbar toolbar = findViewById(R.id.toolbar);
-        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        buttonConnect = findViewById(R.id.buttonConnect);
+        toolbar = findViewById(R.id.toolbar);
+        progressBar = findViewById(R.id.progressBar);
+        textViewInfo = findViewById(R.id.textViewInfo);
+        textViewMeasured = findViewById(R.id.measured_val);
+        buttonToggle = findViewById(R.id.buttonToggle);
+        imageView = findViewById(R.id.imageView);
+
         progressBar.setVisibility(View.GONE);
-        final TextView textViewInfo = findViewById(R.id.textViewInfo);
-        final TextView textViewMeasured = findViewById(R.id.measured_val);
-        final Button buttonToggle = findViewById(R.id.buttonToggle);
         buttonToggle.setEnabled(false);
-        final ImageView imageView = findViewById(R.id.imageView);
         imageView.setBackgroundColor(getResources().getColor(R.color.colorOff));
         buttonToggle.setBackgroundColor(getResources().getColor(R.color.colorOff));
 

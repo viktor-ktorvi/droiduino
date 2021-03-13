@@ -1,5 +1,7 @@
 package com.droiduino.bluetoothconn;
 
+import android.os.Message;
+
 public class Utils {
     // no init, no instance
     private Utils(){}
@@ -11,5 +13,9 @@ public class Utils {
         } catch (NumberFormatException e){
             return false;
         }
+    }
+
+    public static void handleMessage(Message msg){
+
     }
 }
