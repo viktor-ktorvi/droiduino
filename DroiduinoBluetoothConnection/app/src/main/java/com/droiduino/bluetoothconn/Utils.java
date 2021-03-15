@@ -16,6 +16,7 @@ public class Utils {
         }
     }
 
+
     public static void handleMessage(MainActivity mainActivity, Message msg){
         switch (msg.what){
             case MainActivity.CONNECTING_STATUS:
